@@ -1,1 +1,9 @@
-# What CUNY tranfer rules changed between pairs of dates?
+# What CUNY transfer rules changed between pairs of dates?
+
+Each time it is updated from the CUNY PeopleSoft student information system (SIS), “CUNYfirst,” the [cuny_curriculum](https://github.com/cvickery/cuny_curriculum) project creates an archive of the three tables that make up the set of ~1.5 million course transfer rules within CUNY. (The actual number of rules has varied over the years between 1.4 and 1.6 million.)
+
+This project generates CSV files to show what rules were added, dropped, or modified between pairs of archive dates. For each rule that was modified, A row shows: a unique identifier (*rule_key*) for the rule; what the rule looked like at the time of the first archive date; when that version of the rule took effect; what the rule looked like at the time of the second archive date; and the date when the second version of the rule took effect. New and deleted rules are indicated by blanks in the first or second parts of a row.
+
+The *rule_key* is a unique identifier for each rule, with the first eleven characters indicating the sending and receiving colleges. For example, ```BAR01:BKL01:HIS:160``` is the rule key for a Baruch College course that transfers to Brooklyn College. (The ```HIS:160``` part is used to make the *rule_key* unique across the CUNY system.)
+
+This project uses the [rule_descriptions](https://github.com/cvickery/) project to generate the columns that show “what a rule looks like.” Those descriptions show: the course or courses at the sending college, and the “equivalent” course or courses at the receiving college. For each course on the sending side, the minimum grade(s) required for the rule to apply, and for each course on the receiving side, indicators for administrative and blanket credit courses that will be received. For both sides, there is information about general education, major equivalency, and programs (majors) each course can satisfy at that college. Details are given in the *rule_descriptions* project.
