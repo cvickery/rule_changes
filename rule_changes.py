@@ -6,7 +6,7 @@
 import psycopg
 import sys
 
-from bisect import bisect_left
+from bisect import bisect_right
 from datetime import date
 from mk_descriptions import describe_rules
 from pathlib import Path
@@ -35,11 +35,13 @@ if __name__ == '__main__':
 
     # Find the last archive at or before both_target dates
     print(f'\nTargets are {first_target} and {second_target}')
-    first_date_index = min(bisect_left(archive_dates, first_target), len(archive_dates) - 1)
+    if (first_date_index := bisect_right(archive_dates, first_target) - 1) < 0:
+      first_date_index = 0
     first_date = archive_dates[first_date_index]
     first_schema = f'_{str(first_date).replace('-', '_')}'
 
-    second_date_index = min(bisect_left(archive_dates, second_target), len(archive_dates) - 1)
+    if (second_date_index := bisect_right(archive_dates, second_target) - 1) < 0:
+      second_date_index = 0
     second_date = archive_dates[second_date_index]
     second_schema = f'_{str(second_date).replace('-', '_')}'
 
@@ -182,7 +184,7 @@ if __name__ == '__main__':
         cursor.execute(f"""
         COPY (
           SELECT
-            COALESCE(f.rule_key, s.rule_key) AS rule_key,
+            COALESCE(f.rule_key, s.rule_key) AS "Rule Key",
             f.description                    AS "{first_date} Rule",
             f.effective_date                 AS "Effective Date",
             s.description                    AS "{second_date} Rule",
@@ -193,7 +195,7 @@ if __name__ == '__main__':
           WHERE
             -- consider NULL ≠ value and value ≠ value
             f.description IS DISTINCT FROM s.description
-          ORDER BY rule_key)
+          ORDER BY "Rule Key")
         TO '{report_path}' CSV HEADER
         """)
         print(f'{time() - start_time:.1f} sec')
