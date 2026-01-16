@@ -132,15 +132,15 @@ if __name__ == '__main__':
             create index on {schema_name}.destination_courses (rule_key);
 
             copy {schema_name}.transfer_rules
-            from program $$bunzip2 -c {archive_dir}/{first_date}_effective_dates.csv.bz2$$
+            from program $$bunzip2 -c {archive_dir}/{schema_date}_effective_dates.csv.bz2$$
             csv;
 
             copy {schema_name}.source_courses
-            from program $$bunzip2 -c {archive_dir}/{first_date}_source_courses.csv.bz2$$
+            from program $$bunzip2 -c {archive_dir}/{schema_date}_source_courses.csv.bz2$$
             csv;
 
             copy {schema_name}.destination_courses
-            from program $$bunzip2 -c {archive_dir}/{first_date}_destination_courses.csv.bz2$$
+            from program $$bunzip2 -c {archive_dir}/{schema_date}_destination_courses.csv.bz2$$
             csv;
 
             create index if not exists {schema_name}_source_courses_rule_key_idx
