@@ -5,4 +5,5 @@ __pycache__/
 .nova
 *.log
 *.csv
+Heckscher*/
 reports/
