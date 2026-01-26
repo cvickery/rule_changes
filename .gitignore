@@ -6,5 +6,6 @@ __pycache__/
 *.log
 *.csv
 *.numbers
+*.txt
 *.xlsx
 reports/
