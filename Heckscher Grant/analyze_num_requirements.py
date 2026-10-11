@@ -1,4 +1,4 @@
-#! /usr/local/bin/python3
+#! /usr/bin/env python3
 """Analyze the course_rule_matching_verification.csv file."""
 
 import csv

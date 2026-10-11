@@ -1,4 +1,4 @@
-#! /usr/local/bin/python3
+#! /usr/bin/env python3
 """Given a pair of dates find the last archive set prior to each date, and generate a CSV file
    showing what CUNY transfer rules changed from one archive date to the next.
 """
